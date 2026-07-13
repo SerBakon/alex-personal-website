@@ -1,12 +1,13 @@
 "use client";
 import { Stars, TrackballControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { type RefObject, useRef } from "react";
+import { type ReactNode, type RefObject, useRef } from "react";
 import * as THREE from "three";
 import type { TrackballControls as TrackballControlsType } from "three-stdlib";
+import Background from "./background";
 import Wormhole from "./wormhole";
 
-export default function HomeCanvas() {
+export default function HomeCanvas({ children }: { children?: ReactNode }) {
   const controlsRef = useRef<TrackballControlsType | null>(null);
   return (
     <Canvas camera={{ position: [0, 0, 8], fov: 75 }}>
@@ -21,8 +22,8 @@ export default function HomeCanvas() {
         dynamicDampingFactor={0.15}
       />
       <AutoRotate controlsRef={controlsRef} speed={3} />
-      <Stars radius={200} depth={100} count={5000} factor={4} saturation={0} />
-      <color attach="background" args={["#000"]} />
+      <Background />
+      {children}
       <Wormhole />
     </Canvas>
   );
