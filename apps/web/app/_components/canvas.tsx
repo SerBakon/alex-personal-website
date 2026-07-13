@@ -24,7 +24,6 @@ export default function HomeCanvas({ children }: { children?: ReactNode }) {
       <AutoRotate controlsRef={controlsRef} speed={3} />
       <Background />
       {children}
-      <Wormhole />
     </Canvas>
   );
 }
