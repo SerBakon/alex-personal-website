@@ -7,7 +7,13 @@ import type { TrackballControls as TrackballControlsType } from "three-stdlib";
 import Background from "./background";
 import Wormhole from "./wormhole";
 
-export default function HomeCanvas({ children }: { children?: ReactNode }) {
+export default function HomeCanvas({
+  children,
+  isRotating = true,
+}: {
+  children?: ReactNode;
+  isRotating?: boolean;
+}) {
   const controlsRef = useRef<TrackballControlsType | null>(null);
   return (
     <Canvas camera={{ position: [0, 0, 8], fov: 75 }}>
@@ -21,7 +27,7 @@ export default function HomeCanvas({ children }: { children?: ReactNode }) {
         staticMoving={false}
         dynamicDampingFactor={0.15}
       />
-      <AutoRotate controlsRef={controlsRef} speed={3} />
+      {isRotating && <AutoRotate controlsRef={controlsRef} speed={3} />}
       <Background />
       {children}
     </Canvas>
