@@ -7,15 +7,23 @@ export default function Background() {
 
   return (
     <>
-      <mesh>
+      <mesh renderOrder={-1}>
         <sphereGeometry args={[500, 64, 64]} />
         <meshBasicMaterial
           map={texture}
           side={THREE.BackSide}
           color="#cccccc"
+          depthWrite={false}
         />
       </mesh>
-      <Stars radius={200} depth={100} count={5000} factor={4} saturation={1} />
+      <Stars
+        radius={50}
+        depth={50}
+        count={3000}
+        factor={10}
+        saturation={1}
+        fade
+      />
     </>
   );
 }
