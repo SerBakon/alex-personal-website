@@ -1,10 +1,29 @@
-import { Cloud, Stars } from "@react-three/drei";
+import { Stars, useTexture } from "@react-three/drei";
+import * as THREE from "three";
 
 export default function Background() {
+  const texture = useTexture("/8k_milkyway.jpg");
+  texture.colorSpace = THREE.SRGBColorSpace;
+
   return (
     <>
-      <color attach="background" args={["#050510"]} />
-      <Stars radius={200} depth={100} count={5000} factor={4} saturation={1} />
+      <mesh renderOrder={-1}>
+        <sphereGeometry args={[500, 64, 64]} />
+        <meshBasicMaterial
+          map={texture}
+          side={THREE.BackSide}
+          color="#cccccc"
+          depthWrite={false}
+        />
+      </mesh>
+      <Stars
+        radius={50}
+        depth={50}
+        count={3000}
+        factor={10}
+        saturation={1}
+        fade
+      />
     </>
   );
 }
